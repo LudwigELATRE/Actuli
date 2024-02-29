@@ -29,7 +29,6 @@ class LoginController
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
                 $_SESSION['user'] = $user;
-                var_dump($_SESSION);
                 die();
             }
             return $response->withHeader('Location', '/')->withStatus(302);

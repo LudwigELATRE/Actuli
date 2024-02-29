@@ -12,7 +12,6 @@ class Homepage
     public function index(RequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $view = new View();
-        var_dump($_SESSION);
         $html = $view->render('/homepage/homepage.html.twig',['text' => $_SESSION]);
         $response->getBody()->write($html);
         return $response;

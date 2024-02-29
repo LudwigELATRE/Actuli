@@ -27,6 +27,7 @@
         "guzzlehttp/psr7": "^2.6",
         "laminas/laminas-diactoros": "^3.3",
         "slim/psr7": "^1.6",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "robmorgan/phinx": "^0.16.0"
     }
 }

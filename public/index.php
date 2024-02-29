@@ -15,7 +15,6 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../db/connDB.php';
 
 session_start();
-
 $app = AppFactory::create();
 $twig = Twig::create(__DIR__ . '/../templates');
 $app->add(TwigMiddleware::create($app, $twig));
