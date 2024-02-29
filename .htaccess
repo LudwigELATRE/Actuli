@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Vérifie si le fichier ou le répertoire demandé existe physiquement
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Réécrit toutes les requêtes vers public/index.php avec le chemin original comme paramètre 'url'
+RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
+

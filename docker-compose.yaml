@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+    db:
+        container_name: Actuli-Database
+        image: mysql:latest
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - "3306:3306"
+        volumes:
+            - my-db:/var/lib/mysql
+
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        ports:
+            - "8080:80"
+        environment:
+            - PMA_ARBITRARY=1
+volumes:
+    my-db:
