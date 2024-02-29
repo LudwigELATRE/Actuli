@@ -149,7 +149,7 @@
                 <div class="col-xxl-8">
                     <div class="text-center my-5">
                         <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">About Me</span></h2>
-                        <p class="lead fw-light mb-4">My name is Start Bootstrap and I help brands grow.</p>
+                        <p class="lead fw-light mb-4">My name Ludwig ELATRE and I am Symfony developper.</p>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dolorum itaque qui unde quisquam consequatur autem. Eveniet quasi nobis aliquid cumque officiis sed rem iure ipsa! Praesentium ratione atque dolorem?</p>
                         <div class="d-flex justify-content-center fs-2 gap-4">
                             <a class="text-gradient" href="#!"><i class="bi bi-twitter"></i></a>
@@ -161,23 +161,23 @@
             </div>
         </div>
     </section>
-    {% if text["user"]["roles"] == "ROLE_USER" %}
+{#    {% if text["user"]["roles"] == "ROLE_USER" %}
         <li class="nav-item"><a class="nav-link" href="/user">Mon compte</a></li>
     {% else %}
-        {# Liens pour les utilisateurs normaux #}
+        #}{# Liens pour les utilisateurs normaux #}{#
         <li class="nav-item"><a class="nav-link" href="/admin">Mon compte Administrateur</a></li>
-        {#                        <li class="nav-item"><a class="nav-link" href="/logout">Déconnexion</a></li>
-        #}{# L'utilisateur n'est pas connecté. Affichez le lien de connexion/inscription #}{#
-    <li class="nav-item"><a class="nav-link" href="/login">Log in / Sign in</a></li>#}
+        #}{#                        <li class="nav-item"><a class="nav-link" href="/logout">Déconnexion</a></li>
+        #}{##}{# L'utilisateur n'est pas connecté. Affichez le lien de connexion/inscription #}{##}{#
+    <li class="nav-item"><a class="nav-link" href="/login">Log in / Sign in</a></li>#}{#
     {% endif %}
     {% if text.user.roles == "ROLE_USER" %}
         <li class="nav-item"><a class="nav-link" href="/user">Mon compte</a></li>
     {% else %}
-        {# Liens pour les utilisateurs normaux #}
-        <li class="nav-item"><a class="nav-link" href="/admin">Mon compte Administrateur</a></li>
-        <li class="nav-item"><a class="nav-link" href="/logout">Déconnexion</a></li>
-         L'utilisateur n'est pas connecté. Affichez le lien de connexion/inscription
-        <li class="nav-item"><a class="nav-link" href="/login">Log in / Sign in</a></li>
-    {% endif %}
+        #}{# Liens pour les utilisateurs normaux #}{#
+#}{#        <li class="nav-item"><a class="nav-link" href="/admin">Mon compte Administrateur</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Déconnexion</a></li>#}{#
+         #}{#L'utilisateur n'est pas connecté. Affichez le lien de connexion/inscription#}{#
+        <li class="nav-item"><a class="nav-link" href="/login">Log in / Sign in</a></li>#}
+{#    {% endif %}#}
     </main>
 {% endblock %}
