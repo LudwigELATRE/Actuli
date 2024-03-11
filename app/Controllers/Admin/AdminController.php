@@ -1,32 +1,28 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
 use App\lib\View;
 use App\Services\UserService;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class Homepage
+class AdminController
 {
     public function index(RequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $data = new UserService();
         $userData = $data->getSession();
+        $paramUser = $data->getUser();
+
         $view = new View();
-        $html = $view->render('/homepage/homepage.html.twig',['user' => $userData]);
+        $html = $view->render('/admin/admin.html.twig',[
+            'user' => $userData,
+            'userparam' => $paramUser
+        ]);
         $response->getBody()->write($html);
         return $response;
 
     }
 
-    public function show(int $id): void
-    {
-        echo 'Je suis le post ' . $id;
-    }
-
-    public function showPost()
-    {
-        echo 'salut';
-    }
 }

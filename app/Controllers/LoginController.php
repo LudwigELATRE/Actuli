@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Controllers\User\UserSessionController;
 use App\lib\View;
+use App\Services\UserService;
 use PDO;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -13,7 +13,7 @@ class LoginController
     public function login(RequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         global $pdo;
-        $data = new UserSessionController();
+        $data = new UserService();
         $userData = $data->getSession();
         // Supposons que les données soient envoyées via POST pour une meilleure sécurité
         $data = $request->getParsedBody(); // Utilisez getParsedBody() au lieu de getQueryParams() pour les données POST
@@ -48,7 +48,7 @@ class LoginController
     {
         global $pdo; // Assurez-vous que $pdo est bien une instance PDO connectée à votre base de données
         $queryParams = $request->getQueryParams();
-        $data = new UserSessionController();
+        $data = new UserService();
         $userData = $data->getSession();
         if (!$userData['isLoggedIn'])
         {

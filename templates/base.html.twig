@@ -32,7 +32,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link  active" aria-current="page"  href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link  active" aria-current="page"  href="/">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
                     <?php dump($user)?>
@@ -46,7 +46,7 @@
                         <li class="nav-item"><a class="nav-link" href="/logout">Déconnexion</a></li>
                     {% else %}
                         {# L'utilisateur n'est pas connecté. Affichez le lien de connexion/inscription #}
-                        <li class="nav-item"><a class="nav-link" href="/login">Log in / Sign in</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login">Se connecter / S'inscrire</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -74,40 +74,35 @@
                             <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                                 <div class="text-uppercase-expanded text-xs mb-4">Product</div>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Landing</a></li>
+                                    <li class="mb-2"><a href="/" class="text-gradient d-inline">Page d'accueil</a></li>
                                     <li class="mb-2"><a href="#!" class="text-gradient d-inline">Pages</a></li>
                                     <li class="mb-2"><a href="#!" class="text-gradient d-inline">Sections</a></li>
                                     <li class="mb-2"><a href="#!" class="text-gradient d-inline">Documentation</a></li>
-                                    <li><a href="#!">Changelog</a></li>
+                                    <li><a href="#!">Journal des modifications</a></li>
                                 </ul>
                             </div>
                             <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                                <div class="text-uppercase-expanded text-xs mb-4">Technical</div>
+                                <div class="text-uppercase-expanded text-xs mb-4">Technique</div>
                                 <ul class="list-unstyled mb-0">
                                     <li class="mb-2"><a href="#!" class="text-gradient d-inline">Documentation</a></li>
-                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Changelog</a></li>
-                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Theme Customizer</a></li>
-                                    <li><a href="#!">UI Kit</a></li>
+                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Journal des modifications</a></li>
                                 </ul>
                             </div>
                             <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-                                <div class="text-uppercase-expanded text-xs mb-4">Includes</div>
+                                <div class="text-uppercase-expanded text-xs mb-4">Inclut</div>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Utilities</a></li>
-                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Components</a></li>
-                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Layouts</a></li>
+                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Utilitaires</a></li>
+                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Composants</a></li>
+                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Mises en page</a></li>
                                     <li class="mb-2"><a href="#!" class="text-gradient d-inline">Code Samples</a></li>
-                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Products</a></li>
-                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Affiliates</a></li>
                                     <li><a href="#!">Updates</a></li>
                                 </ul>
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                <div class="text-uppercase-expanded text-xs mb-4">Legal</div>
+                                <div class="text-uppercase-expanded text-xs mb-4">Légal</div>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Privacy Policy</a></li>
-                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Terms and Conditions</a></li>
-                                    <li><a href="#!">License</a></li>
+                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Politique de confidentialité</a></li>
+                                    <li class="mb-2"><a href="#!" class="text-gradient d-inline">Conditions générales</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -117,9 +112,9 @@
                 <div class="row gx-5 align-items-center">
                     <div class="col-md-6 small" class="text-gradient d-inline">Copyright © Your Website 2023</div>
                     <div class="col-md-6 text-md-end small">
-                        <a href="#!" class="text-gradient d-inline">Privacy Policy</a>
+                        <a href="#!" class="text-gradient d-inline">Politique de confidentialité</a>
                         ·
-                        <a href="#!" class="text-gradient d-inline">Terms &amp; Conditions</a>
+                        <a href="#!" class="text-gradient d-inline">Conditions générales</a>
                     </div>
                 </div>
             </div>

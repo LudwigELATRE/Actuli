@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\Admin\AdminController;
 use App\Controllers\ContactController;
 use App\Controllers\Homepage;
 use App\Controllers\IndexPostController;
@@ -32,11 +33,12 @@ $app->add(TwigMiddleware::create($app, $twig));
 $app->get('/', [Homepage::class, 'index']);
 $app->get('/blog', [IndexPostController::class, 'indexPost']);
 $app->get('/post/{id}', [PostController::class, 'showPost']);
-$app->map(['GET', 'POST'],'/post/{id}/ajout-commentaire', [PostController::class, 'add']);
+$app->map(['GET', 'POST'],'/post/{id}/ajout-commentaire', [PostController::class, 'addComment']);
 $app->map(['GET', 'POST'],'/contact', [ContactController::class, 'contact']);
 $app->get('/register', [LoginController::class, 'register']);
 $app->map(['GET', 'POST'], '/login', LoginController::class . ':login');
 $app->get('/logout', [LoginController::class, 'logout']);
+$app->get('/admin', [AdminController::class, 'index']);
 /*$app->get('/blog/article/{id}', [ShowPostController::class, 'show']);
 $app->get('/blog/ajout-article', [AddPostController::class, 'renderCreationForm']);
 $app->post('/blog/ajout-article', [AddPostController::class, 'add']);

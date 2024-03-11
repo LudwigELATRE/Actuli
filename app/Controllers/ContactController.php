@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Controllers\User\UserSessionController;
 use App\lib\View;
+use App\Services\UserService;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -12,7 +12,7 @@ class ContactController
     public function contact(RequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         global $pdo; // Assurez-vous que $pdo est bien une instance PDO connectée à votre base de données
-        $data = new UserSessionController();
+        $data = new UserService();
         $userData = $data->getSession();
         $queryParams = $request->getParsedBody();
 

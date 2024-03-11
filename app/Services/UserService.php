@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers\User;
+namespace App\Services;
 
-class UserSessionController
+class UserService
 {
     public function getSession(): array
     {
@@ -12,4 +12,8 @@ class UserSessionController
         ];
     }
 
+    public function getUser(): array
+    {
+        return $_SESSION['user'];
+    }
 }
