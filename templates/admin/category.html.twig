@@ -26,38 +26,33 @@
                 </div>
             </div>
         </div>
-        <div class="row col-10">
+        <div class="row">
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Tableau de bord</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Tableau de bord</li>
                 </ol>
                 <div class="card mb-4">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between">
                         <i class="fas fa-table me-1"></i>
-                        DataTable Example
+                        <a class="btn btn-primary btn-sm" href="/admin/categories/categorie">Ajouter Categorie</a>
                     </div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Position</th>
-                                <th>Date de creation</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for alluser in allusers %}
-                                <tr>
-                                    <td>{{ alluser.firstname }} {{ alluser.lastname }}</td>
-                                    <td>{{ alluser.email }}</td>
-                                    <td>{{ alluser.roles }}</td>
-                                    <td>{{ alluser.created_at }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                        {% for category in categories %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- Blog post-->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="small text-muted">{{ category.createdAt|date("m/d/Y") }}</div>
+                                            <h2 class="card-title h4">{{ category.name }}</h2>
+                                            <p class="card-text">{{ category.description }}</p>
+                                            <a class="btn btn-danger" href="/admin/categories/supprimer/{{ category.id }}">Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

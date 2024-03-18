@@ -11,7 +11,7 @@
                 <div class="card mb-4">
                     <a href="/post/{{ posts[0].id }}"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
                     <div class="card-body">
-                        <div class="small text-muted">{{ posts[0].createdAt }}</div>
+                        <div class="small text-muted">{{ posts[0].createdAt|date("m/d/Y") }}</div>
                         <h2 class="card-title">{{ posts[0].title }}</h2>
                         <p class="card-text">{{ posts[0].content }}</p>
                         <a class="btn btn-primary" href="/post/{{ posts[0].id }}">Read more →</a>
@@ -51,7 +51,7 @@
             <!-- Side widgets-->
             <div class="col-lg-4">
                 <!-- Search widget-->
-                <div class="card mb-4">
+{#                <div class="card mb-4">
                     <div class="card-header">Recherche</div>
                     <div class="card-body">
                         <div class="input-group">
@@ -59,7 +59,7 @@
                             <button class="btn btn-primary" id="button-search" type="button">Go!</button>
                         </div>
                     </div>
-                </div>
+                </div>#}
                 <!-- Categories widget-->
                 <div class="card mb-4">
                     <div class="card-header">Catégories</div>
@@ -68,7 +68,7 @@
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
                                     {% for categorie in categories %}
-                                    <li><a href="#!">{{ categorie.name }}</a></li>
+                                    <li>{{ categorie.name }}</li>
                                     {% endfor %}
                                 </ul>
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\lib\View;
+use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use App\Repository\PostsComment;
 use App\Services\UserService;
@@ -18,12 +19,15 @@ class PostController
         $post = $postRepository->findById($args);
         $postsComment = new PostsComment();
         $comments = $postsComment->getAllComment($args);
+        $categoryRepository = new CategoryRepository();
+        $categories = $categoryRepository->getAllCategory();
 
         $view = new View();
         $html = $view->render('/blogpage/show.html.twig', [
             "post" => $post,
             'user' => $userData,
             'comments' => $comments,
+            'categories' => $categories
         ]);
         $response->getBody()->write($html);
         return $response;
@@ -31,7 +35,6 @@ class PostController
 
     public function addComment(RequestInterface $request, ResponseInterface $response, array $args)
     {
-        global $pdo; // Assurez-vous que $pdo est bien une instance PDO connectée à votre base de données
         $data = new UserService();
         $userData = $data->getSession();
         $queryParams = $request->getParsedBody();
@@ -47,17 +50,8 @@ class PostController
                     'createdAt' => $datetime->format('Y-m-d'),
                 ];
 
-                // Préparation de la requête
-                $stmt = $pdo->prepare("INSERT INTO posts_comment (post_id,  author, content, email, createdAt) VALUES (:post_id, :author, :content, :email, :createdAt)");
-
-                // Exécution de la requête avec les valeurs
-                $stmt->execute([
-                    ':post_id' => $data["postId"],
-                    ':author' => $data["author"],
-                    ':content' => $data["content"],
-                    ':email' => $data["email"],
-                    ':createdAt' => $data["createdAt"],
-                ]);
+                $postrepository = new PostsComment();
+                $postrepository->save($data);
 
                 return $response->withHeader('Location', '/post/'.$args['id'])->withStatus(302);
             }catch (\Exception $e)
@@ -74,4 +68,165 @@ class PostController
             }
         }
     }
+
+    public function postsUser(RequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $data = new UserService();
+        $userData = $data->getSession();
+        $postRepository = new PostRepository();
+        $posts = $postRepository->getPostFormUser($data->getUser()['id']);
+
+        $view = new View();
+        $html = $view->render('/user/post.html.twig',[
+            'user' => $userData,
+            'posts' => $posts
+        ]);
+        $response->getBody()->write($html);
+        return $response;
+    }
+
+    public function ajouterPostUser(RequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $data = new UserService();
+        $userData = $data->getSession();
+        $categorieRepository = new CategoryRepository();
+        $categories = $categorieRepository->getAllCategory();
+
+        $view = new View();
+        $html = $view->render('/user/ajouterPost.html.twig',
+            [
+                'user' => $userData,
+                'categories' => $categories,
+            ]);
+        $response->getBody()->write($html);
+        return $response;
+    }
+
+    public function createPost(RequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $data = new UserService();
+        $userData = $data->getSession();
+        $categorieRepository = new CategoryRepository();
+        $categories = $categorieRepository->getAllCategory();
+        $queryParams = $request->getParsedBody();
+        if (!empty($queryParams) && isset($queryParams["categorie"], $queryParams["title"], $queryParams["content"]))
+        {
+            $slug = strtolower(trim(str_replace(' ', '-', $queryParams["title"])));
+            $datetime = new \DateTimeImmutable();
+            try {
+                $data = [
+                    'userId' => $data->getUser()['id'],
+                    'categorie' => $queryParams["categorie"],
+                    'title' => $queryParams["title"],
+                    'slug' => $slug,
+                    'content' => $queryParams["content"],
+                    'published' => $queryParams["published"],
+                    'createdAt' => $datetime->format('Y-m-d'),
+                ];
+                $postRepositoy = new PostRepository();
+                $postRepositoy->save($data);
+                return $response->withHeader('Location', '/mon-compte/mes-posts')->withStatus(302);
+            }catch (\Exception $e)
+            {
+                // Gestion des erreurs (par exemple, email déjà existant)
+                $error = "Une erreur est survenue : " . $e->getMessage();
+                // Passer l'erreur à la vue
+                $view = new View();
+                $html = $view->render('/user/ajouterPost.html.twig', [
+                    'error' => $error,
+                    'categories' => $categories,
+                    ]);
+                $response->getBody()->write($html);
+                return $response;
+            }
+        }else {
+            $error = "Veuillez fournir tous les champs requis.";
+            $view = new View();
+            $html = $view->render('/user/ajouterPost.html.twig', [
+                'error' => $error,
+                'user' => $userData,
+                'categories' => $categories,
+            ]);
+            $response->getBody()->write($html);
+            return $response;
+        }
+
+    }
+
+    public  function updatePost(RequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $data = new UserService();
+        $userData = $data->getSession();
+        $categorieRepository = new CategoryRepository();
+        $categories = $categorieRepository->getAllCategory();
+        $postRepository = new PostRepository();
+        $post = $postRepository->findById($args);
+        $view = new View();
+        $html = $view->render('/user/updatePost.html.twig', [
+            "post" => $post,
+            "user" => $userData,
+            'categories' => $categories,
+        ]);
+        $response->getBody()->write($html);
+        return $response;
+    }
+
+    public function updatePostFromUser(RequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $data = new UserService();
+        $userData = $data->getSession();
+        $categorieRepository = new CategoryRepository();
+        $categories = $categorieRepository->getAllCategory();
+        $queryParams = $request->getParsedBody();
+        if (!empty($queryParams) && isset($queryParams["categorie"], $queryParams["title"], $queryParams["content"]))
+        {
+            $slug = strtolower(trim(str_replace(' ', '-', $queryParams["title"])));
+            $datetime = new \DateTimeImmutable();
+            try {
+                $data = [
+                    'id' => $queryParams["id"],
+                    'categorie' => $queryParams["categorie"],
+                    'title' => $queryParams["title"],
+                    'slug' => $slug,
+                    'content' => $queryParams["content"],
+                    'published' => $queryParams["published"],
+                    'updatedAt' => $datetime->format('Y-m-d'),
+                ];
+                $postRepositoy = new PostRepository();
+                $postRepositoy->updatePost($data);
+                return $response->withHeader('Location', '/mon-compte/mes-posts')->withStatus(302);
+            }catch (\Exception $e)
+            {
+                // Gestion des erreurs (par exemple, email déjà existant)
+                $error = "Une erreur est survenue : " . $e->getMessage();
+                // Passer l'erreur à la vue
+                $view = new View();
+                $html = $view->render('/user/updatePost.html.twig', [
+                    'error' => $error,
+                    'user' => $userData,
+                    'categories' => $categories,
+                ]);
+                $response->getBody()->write($html);
+                return $response;
+            }
+        }else {
+            $error = "Veuillez fournir tous les champs requis.";
+            $view = new View();
+            $html = $view->render('/user/updatePost.html.twig', [
+                'error' => $error,
+                'user' => $userData,
+                'categories' => $categories,
+            ]);
+            $response->getBody()->write($html);
+            return $response;
+        }
+    }
+
+    public function deletePostsUser(RequestInterface $request, ResponseInterface $response,array $args): ResponseInterface
+    {
+        $postRepository = new PostRepository();
+        $postRepository->deletePostFromUser($args);
+        return $response->withHeader('Location', '/mon-compte/mes-posts')->withStatus(302);
+    }
+
 }

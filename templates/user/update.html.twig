@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+
+{% block content %}
+    <section style="background-color: #eee;" class="py-5">
+        <div class="container py-5">
+            <div class="row">
+                <form id="user-update-form" name="user-update-form" action="/mon-compte/profil/update" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="inputAddress2">Mobile</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="firstname" value="{{ userparam.0.firstname }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress2">Mobile</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="lastname" value="{{ userparam.0.lastname }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress2">Profile</label>
+                        <textarea type="text" rows="3" class="form-control" id="profile" name="profile" placeholder="Décrivez-vous.">{{ userparam.0.profile }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress2">Mobile</label>
+                        <input type="number" class="form-control" id="mobile" name="mobile" placeholder="numero" value="{{ userparam.0.mobile }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Address</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="14 Rue Thomas Lemaître 92000 Nanterre" value="{{ userparam.0.address }}">
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="exampleFormControlFile1">Photo de Profil</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <a type="button" class="btn btn-info" href="/mon-compte">Retour</a>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
