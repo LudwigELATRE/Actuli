@@ -13,8 +13,16 @@
                             {% else %}
                                 <h4>Administrateur</h4>
                             {% endif %}
+                            {% if userparam.0.sexe == "man" %}
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                                  class="rounded-circle img-fluid" style="width: 150px;">
+                            {% elseif userparam.0.sexe == "woman" %}
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4.webp" alt="avatar"
+                                     class="rounded-circle img-fluid" style="width: 150px;">
+                            {% elseif userparam.0.sexe == "other" %}
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp" alt="avatar"
+                                     class="rounded-circle img-fluid" style="width: 150px;">
+                            {% endif %}
                             <h5 class="my-3">{{ userparam.0.firstname }} {{ userparam.0.lastname }}</h5>
                             <p class="text-muted mb-1">{{ userparam.0.profile }}</p>
                         </div>

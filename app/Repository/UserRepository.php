@@ -16,7 +16,7 @@ class UserRepository
             ':lastname' => $data['lastname'],
             ':email' => $data['email'],
             ':password' => $data['password'],
-            ':roles' => $data['roles']
+            ':roles' => $data['roles'],
         ]);
     }
     public function getAllUsers(): array
