@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entity\Category;
 use App\lib\View;
 use App\Repository\CategoryRepository;
 use App\Services\UserService;
@@ -56,14 +57,9 @@ class CategoryCrudController
             $slug = strtolower(trim(str_replace(' ', '-', $queryParams["name"])));
             $datetime = new \DateTimeImmutable();
             try {
-                $data = [
-                    'name' => $queryParams["name"],
-                    'description' => $queryParams["description"],
-                    'slug' => $slug,
-                    'createdAt' => $datetime->format('Y-m-d'),
-                ];
+                $category = new Category($queryParams["name"],$queryParams["description"],$slug,$datetime);
                 $categoryRepositoy = new CategoryRepository();
-                $categoryRepositoy->save($data);
+                $categoryRepositoy->save($category->getName(),$category->getDescription(),$category->getSlug(),$category->getCreatedAt());
                 return $response->withHeader('Location', '/admin/categories')->withStatus(302);
             }catch (Exception $e)
             {

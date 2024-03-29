@@ -50,25 +50,15 @@
             </div>
             <!-- Side widgets-->
             <div class="col-lg-4">
-                <!-- Search widget-->
-{#                <div class="card mb-4">
-                    <div class="card-header">Recherche</div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Entrez le terme de recherche..." aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
-                    </div>
-                </div>#}
                 <!-- Categories widget-->
                 <div class="card mb-4">
                     <div class="card-header">Catégories</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <ul class="list-unstyled mb-0">
                                     {% for categorie in categories %}
-                                    <li>{{ categorie.name }}</li>
+                                    <li class="text-decoration-underline  m-2">{{ categorie.name }}</li>
                                     {% endfor %}
                                 </ul>
                             </div>

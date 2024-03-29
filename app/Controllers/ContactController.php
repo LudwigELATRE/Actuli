@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Entity\Contact;
 use App\lib\View;
 use App\Repository\ContactRepository;
 use App\Services\UserService;
@@ -19,13 +20,9 @@ class ContactController
         if (!empty($queryParams) && isset($queryParams["name"], $queryParams["subject"], $queryParams["message"]))
         {
             try {
-                $data = [
-                    'name' => $queryParams["name"],
-                    'subject' => $queryParams["subject"],
-                    'message' => $queryParams["message"]
-                ];
+                $contact = new Contact($queryParams["name"],$queryParams["subject"],$queryParams["message"]);
                 $contactRepositoy = new ContactRepository();
-                $contactRepositoy->save($data);
+                $contactRepositoy->save($contact->getName(),$contact->getSubject(),$contact->getMessage());
                 return $response->withHeader('Location', '/')->withStatus(302);
             }catch (\Exception $e)
             {

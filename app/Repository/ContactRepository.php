@@ -6,7 +6,8 @@ use App\Services\ConnexionService;
 use PDO;
 class ContactRepository
 {
-    public function save(array $data){
+    public function save(string $name,string $subject,string $message): void
+    {
         // Préparation de la requête
         //$connexionDatabase = new ConnexionService();
         //$pdo = $connexionDatabase->connexionDatabase();
@@ -16,9 +17,9 @@ class ContactRepository
 
         // Exécution de la requête avec les valeurs
         $stmt->execute([
-            ':name' => $data['name'],
-            ':subject' => $data['subject'],
-            ':message' => $data['message'],
+            ':name' => $name,
+            ':subject' => $subject,
+            ':message' => $message,
         ]);
     }
 
