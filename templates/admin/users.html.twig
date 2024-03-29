@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="row col-10">
+        <div class="row">
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Tableau de bord</h1>
                 <ol class="breadcrumb mb-4">
@@ -38,22 +38,25 @@
                         DataTable Example
                     </div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
+                        <table class="table">
                             <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Position</th>
-                                <th>Date de creation</th>
+                                <th scope="col">Numero</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Date de creation</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for alluser in allusers %}
                                 <tr>
+                                    <th scope="row"> {{ alluser.id }}</th>
                                     <td>{{ alluser.firstname }} {{ alluser.lastname }}</td>
                                     <td>{{ alluser.email }}</td>
                                     <td>{{ alluser.roles }}</td>
-                                    <td>{{ alluser.created_at }}</td>
+                                    <td>{{ alluser.created_at|date("m/d/Y") }}</td>
+                                    <td><a><a class="btn btn-danger" href="/admin/users/supprimer/{{ alluser.id }}">Supprimer</a></a></td>
                                 </tr>
                             {% endfor %}
                             </tbody>

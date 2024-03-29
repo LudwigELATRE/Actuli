@@ -35,29 +35,25 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        DataTable Example
+                        Tous les Articles
                     </div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Position</th>
-                                <th>Date de creation</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for alluser in allusers %}
-                                <tr>
-                                    <td>{{ alluser.firstname }} {{ alluser.lastname }}</td>
-                                    <td>{{ alluser.email }}</td>
-                                    <td>{{ alluser.roles }}</td>
-                                    <td>{{ alluser.created_at }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                        {% for post in posts %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- Blog post-->
+                                    <div class="card mb-4">
+                                        <a href="/admin/posts/comment/{{ post.id }}"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                        <div class="card-body">
+                                            <div class="small text-muted">{{ post.createdAt|date("m/d/Y") }}</div>
+                                            <h2 class="card-title h4">{{ post.title }}</h2>
+                                            <p class="card-text">{{ post.content }}</p>
+                                            <a class="btn btn-danger" href="/mon-compte/mes-posts/supprimer/{{ post.id }}">Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
