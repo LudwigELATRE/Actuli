@@ -113,6 +113,7 @@ class PostController
         {
             $slug = strtolower(trim(str_replace(' ', '-', $queryParams["title"])));
             $datetime = new \DateTimeImmutable();
+            $image = basename(str_replace(' ', '-', strtolower($_FILES['post-image']['name'])));
             try {
                 $data = [
                     'userId' => $data->getUser()['id'],
@@ -120,9 +121,11 @@ class PostController
                     'title' => $queryParams["title"],
                     'slug' => $slug,
                     'content' => $queryParams["content"],
+                    'image' => $image,
                     'published' => $queryParams["published"],
                     'createdAt' => $datetime->format('Y-m-d'),
                 ];
+                /*dd($data);*/
                 $postRepositoy = new PostRepository();
                 $postRepositoy->save($data);
                 return $response->withHeader('Location', '/mon-compte/mes-posts')->withStatus(302);

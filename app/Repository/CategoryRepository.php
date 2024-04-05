@@ -6,17 +6,17 @@ use Exception;
 use PDO;
 class CategoryRepository
 {
-    public function save(array $data): void
+    public function save(string $name,string $description,string $slug, string $createdAt): void
     {
         global $pdo;
         $stmt = $pdo->prepare("INSERT INTO category (name, description, slug ,createdAt) VALUES (:name, :description, :slug ,:createdAt)");
 
         // Exécution de la requête avec les valeurs
         $stmt->execute([
-            ':name' => $data['name'],
-            ':description' => $data['description'],
-            ':slug' => $data['slug'],
-            ':createdAt' => $data['createdAt'],
+            ':name' => $name,
+            ':description' => $description,
+            ':slug' => $slug,
+            ':createdAt' => $createdAt,
         ]);
     }
     public function getAllCategory(): array

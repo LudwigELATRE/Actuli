@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Entity\User;
 use App\lib\View;
 use App\Repository\UserRepository;
 use App\Services\UserService;
@@ -49,16 +50,19 @@ class LoginController
         $userData = $data->getSession();
         if (!$userData['isLoggedIn'])
         {
-            if (!empty($queryParams) && isset($queryParams["firstname"], $queryParams["lastname"], $queryParams["email"], $queryParams["password"])) {
+            if (!empty($queryParams) && isset($queryParams["firstname"], $queryParams["lastname"], $queryParams["email"], $queryParams["password"], $queryParams["password"] )) {
+                $datetime = new \DateTimeImmutable();
                 try {
-                    $data = [
+/*                    $data = [
                         'firstname' => $queryParams["firstname"],
                         'lastname' => $queryParams["lastname"],
                         'email' => $queryParams["email"],
                         'password' => password_hash($queryParams["password"], PASSWORD_DEFAULT),
                         'roles' => 'ROLE_USER'
-                    ];
-
+                    ];*/
+                    $user = new User($queryParams["firstname"],$queryParams["lastname"],$queryParams["email"],password_hash($queryParams["password"], PASSWORD_DEFAULT),'ROLE_USER',$datetime,$queryParams["sexe"]);
+                    dd($user);
+                    //$userRepository = new UserRepository();
                     $userRepository = new UserRepository();
                     $userRepository->save($data);
 
