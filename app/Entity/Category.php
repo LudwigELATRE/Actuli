@@ -4,11 +4,12 @@ namespace App\Entity;
 
 class Category
 {
-    private string $name;
-    private string $description;
-    private string $slug;
-    private string $createdAt;
-    private string $updatedAt;
+    private ?int $id;
+    private ?string $name;
+    private ?string $description;
+    private ?string $slug;
+    private ?string $createdAt;
+    private ?string $updatedAt;
 
     public function __construct(string $name,string $description,string $slug, \DateTimeImmutable $createdAt)
     {
@@ -18,7 +19,12 @@ class Category
         $this->createdAt = $createdAt->format('Y-m-d');
     }
 
-    public function getName(): string
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -28,7 +34,7 @@ class Category
         $this->name = $name;
     }
 
-    public function getSlug(): string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -38,7 +44,7 @@ class Category
         $this->slug = $slug;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -48,7 +54,7 @@ class Category
         $this->description = $description;
     }
 
-    public function getCreatedAt(): string
+    public function getCreatedAt(): ?string
     {
         return $this->createdAt;
     }
@@ -58,7 +64,7 @@ class Category
         $this->createdAt = $createdAt;
     }
 
-    public function getUpdatedAt(): string
+    public function getUpdatedAt(): ?string
     {
         return $this->updatedAt;
     }

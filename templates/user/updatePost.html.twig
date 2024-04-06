@@ -35,7 +35,9 @@
 
                     <div data-mdb-input-init class="form-outline mb-4">
                         <label for="exampleFormControlFile1">Image</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        <!-- On limite le fichier à 100Ko -->
+                        <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+                        <input type="file" class="form-control-file" id="post-image" name="post-image">
                     </div>
 
                     <div class="form-check d-flex mb-4">
