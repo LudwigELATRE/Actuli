@@ -8,11 +8,15 @@
             <!-- Blog entries-->
             <div class="col-lg-8">
                 <form id="user-ajout-form" name="user-ajout-form" action="/mon-compte/mes-posts/ajouter/post" method="POST" enctype="multipart/form-data">
-
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error.0 }}
+                    </div>
+                    {% endif %}
                     <div data-mdb-input-init class="form-outline mb-4">
                         <label class="visually-hidden" for="inlineFormSelectPref">Categorie</label>
                         <select class="form-select" aria-label="Default select example" id="categorie" name="categorie">
-                            <option selected>Choissisez Votre Categorie</option>
+                            <option disabled selected>Choissisez Votre Categorie</option>
                             {% for categorie in categories %}
                             {#{% for i in 0..4 %}#}
                             <option value="{{ categorie.name }}">{{ categorie.name }}</option>

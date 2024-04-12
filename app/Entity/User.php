@@ -4,19 +4,20 @@ namespace App\Entity;
 
 class User
 {
-    private string $firstname;
-    private string $lastname;
-    private string $email;
-    private string $address;
-    private int $mobile;
-    private string $password;
-    private string $slug;
-    private string $image;
-    private string $profile;
-    private string $roles;
-    private string $createdAt;
-    private string $sexe;
-    public function __construct(string $firstname,string $lastname,string $email, string $password, string $roles, \DateTimeImmutable $createdAt, string $sexe )
+    private ?int $id;
+    private ?string $firstname;
+    private ?string $lastname;
+    private ?string $email;
+    private ?string $address;
+    private ?int $mobile;
+    private ?string $password;
+    private ?string $slug;
+    private ?string $image;
+    private ?string $profile;
+    private ?string $roles;
+    private ?string $createdAt;
+    private ?string $sexe;
+    public function __construct(string $firstname,string $lastname,string $email, string $password, string $roles, \DateTimeImmutable $createdAt, string $sexe, string $slug )
     {
         $this->firstname = $firstname;
         $this->lastname = $lastname;
@@ -25,7 +26,12 @@ class User
         $this->roles = $roles;
         $this->createdAt = $createdAt->format('Y-m-d');
         $this->sexe = $sexe;
+        $this->slug = $slug;
+    }
 
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getFirstname(): string

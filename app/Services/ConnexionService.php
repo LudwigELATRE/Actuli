@@ -2,15 +2,24 @@
 
 namespace App\Services;
 
+use PDO;
+
 class ConnexionService
 {
     const HOST = "127.0.0.1";
     const DATABASE = "actuli";
     const USER = "root";
-    const PASSWORD = 'valeur constante';
-    const PORT = 'valeur constante';
-    const CHARSET = 'valeur constante';
-    public function connexionDatabase()
+    const PASSWORD = "root";
+    const PORT = "3306:3306";
+    const CHARSET = "utf8mb4";
+
+    /**
+     * Creates a new PDO connection using predefined connection parameters.
+     * Sets specific PDO options to enhance error reporting and result fetching.
+     *
+     * @return PDO|null Returns a PDO connection object or null if connection fails.
+     */
+    public function connexionDatabase(): PDO|null
     {
         $dsn = "mysql:host=" . self::HOST . ";dbname=" . self::DATABASE . ";port=" . self::PORT . ";charset=" . self::CHARSET;
         $option = [
@@ -19,17 +28,18 @@ class ConnexionService
             \PDO::ATTR_EMULATE_PREPARES => false,
         ];
         try {
-            $pdo = new \PDO($dsn, self::USER, self::PASSWORD, $option);
-            echo 'la base de donnee est prete';
+            $pdo = new PDO($dsn, self::USER, self::PASSWORD, $option);
         } catch (\PDOException $e) {
-            // Log de l'erreur plutôt que d'afficher le message directement
             error_log("Échec de la connexion : " . $e->getMessage());
-            // Retourner null ou gérer l'erreur d'une autre manière appropriée
             return null;
         }
         return $pdo;
     }
 
+    /**
+     * Deletes a specific database table, specified in the method.
+     * Note: This method should be used with extreme caution as it will permanently delete data.
+     */
     public function deleteDatabase()
     {
         $pdo = $this->connexionDatabase();

@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+
+{% block content %}
+    <div class="container d-flex">
+        <div class="row col-2">
+            <div class="sb-sidenav-menu">
+                <div class="nav flex-column">
+                    <div class="sb-sidenav-menu-heading">Tableau de bord</div>
+                    <a class="nav-link d-flex" href="/admin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Tableau de bord
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/users">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                        User
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/categories">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+                        Categorie
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/posts">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-newspaper"></i></div>
+                        Article
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/comments">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-comment"></i></div>
+                        Commentaires
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/contacts">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-envelope"></i></div>
+                        Contacts
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Tableau de bord</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Tableau de bord</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Tous les demende de contact
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Numero</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Sujet</th>
+                                <th scope="col">Date de creation</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for allcontact in allcontacts %}
+                                <tr>
+                                    <th scope="row"> {{ allcontact.id }}</th>
+                                    <td>{{ allcontact.name }}</td>
+                                    <td>{{ allcontact.email }}</td>
+                                    <td>{{ allcontact.subject }}</td>
+                                    <td>{{ allcontact.message }}</td>
+                                    <td><a><a class="btn btn-danger" href="/admin/contacts/supprimer/{{ allcontact.id }}">Supprimer</a></a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

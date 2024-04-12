@@ -11,6 +11,15 @@ use Psr\Http\Message\ResponseInterface;
 
 class LoginController
 {
+    /**
+     * Traite la tentative de connexion de l'utilisateur.
+     * Vérifie les identifiants fournis (email et mot de passe) et authentifie l'utilisateur.
+     * Redirige vers la page d'accueil si la connexion réussit ou affiche un message d'erreur si elle échoue.
+     *
+     * @param RequestInterface $request La requête HTTP contenant les données du formulaire de connexion.
+     * @param ResponseInterface $response La réponse HTTP à retourner.
+     * @return ResponseInterface
+     */
     public function login(RequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $data = new UserService();
@@ -43,6 +52,15 @@ class LoginController
         }
     }
 
+    /**
+     * Gère l'enregistrement d'un nouvel utilisateur.
+     * Vérifie les données du formulaire et enregistre le nouvel utilisateur dans la base de données.
+     * Redirige vers la page de connexion après l'enregistrement réussi ou affiche un message d'erreur en cas d'échec.
+     *
+     * @param RequestInterface $request La requête HTTP contenant les données du formulaire d'inscription.
+     * @param ResponseInterface $response La réponse HTTP à retourner.
+     * @return ResponseInterface
+     */
     public function register(RequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
@@ -50,21 +68,13 @@ class LoginController
         $userData = $data->getSession();
         if (!$userData['isLoggedIn'])
         {
-            if (!empty($queryParams) && isset($queryParams["firstname"], $queryParams["lastname"], $queryParams["email"], $queryParams["password"], $queryParams["password"] )) {
+            if (!empty($queryParams) && isset($queryParams["firstname"], $queryParams["lastname"], $queryParams["email"], $queryParams["password"], $queryParams["sexe"] )) {
+                $slug = strtolower($queryParams["firstname"]."-".$queryParams["lastname"]);
                 $datetime = new \DateTimeImmutable();
                 try {
-/*                    $data = [
-                        'firstname' => $queryParams["firstname"],
-                        'lastname' => $queryParams["lastname"],
-                        'email' => $queryParams["email"],
-                        'password' => password_hash($queryParams["password"], PASSWORD_DEFAULT),
-                        'roles' => 'ROLE_USER'
-                    ];*/
-                    $user = new User($queryParams["firstname"],$queryParams["lastname"],$queryParams["email"],password_hash($queryParams["password"], PASSWORD_DEFAULT),'ROLE_USER',$datetime,$queryParams["sexe"]);
-                    dd($user);
-                    //$userRepository = new UserRepository();
+                    $user = new User($queryParams["firstname"],$queryParams["lastname"],$queryParams["email"],password_hash($queryParams["password"], PASSWORD_DEFAULT),'ROLE_USER',$datetime,$queryParams["sexe"],$slug);
                     $userRepository = new UserRepository();
-                    $userRepository->save($data);
+                    $userRepository->save($user);
 
                     return $response->withHeader('Location', '/login')->withStatus(302);
                 } catch (\Exception $e)
@@ -88,6 +98,10 @@ class LoginController
         }
     }
 
+    /**
+     * Déconnecte l'utilisateur.
+     * Efface les données de la session et redirige vers la page de connexion.
+     */
     public function logout()
     {
         $_SESSION = [];

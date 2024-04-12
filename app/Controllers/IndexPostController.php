@@ -12,6 +12,16 @@ use Psr\Http\Message\ResponseInterface;
 
 class IndexPostController
 {
+    /**
+     * Affiche la page principale du blog avec la liste de tous les posts et les catégories disponibles.
+     * Récupère les données des utilisateurs via UserService pour vérifier l'authentification,
+     * extrait tous les posts et toutes les catégories de la base de données à l'aide des repositories respectifs,
+     * et les transmet à la vue pour l'affichage.
+     *
+     * @param RequestInterface $request La requête HTTP entrante.
+     * @param ResponseInterface $response La réponse HTTP à retourner.
+     * @return ResponseInterface La réponse contenant le HTML généré pour la page du blog.
+     */
     public function indexPost(RequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $data = new UserService();

@@ -1,15 +1,18 @@
 <?php
 
 use App\Controllers\Admin\AdminController;
-use App\Controllers\Admin\CategoryCrudController;
-use App\Controllers\Admin\PostCrudController;
-use App\Controllers\Admin\UserCrudController;
+use App\Controllers\Admin\CategoryAdminController;
+use App\Controllers\Admin\CommentAdminController;
+use App\Controllers\Admin\ContactAdminController;
+use App\Controllers\Admin\PostAdminController;
+use App\Controllers\Admin\UserAdminController;
 use App\Controllers\ContactController;
 use App\Controllers\Homepage;
 use App\Controllers\IndexPostController;
 use App\Controllers\LoginController;
 use App\Controllers\PostController;
 use App\Controllers\UserController;
+use App\Services\ConnexionService;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Views\Twig;
@@ -18,7 +21,10 @@ use Slim\Factory\AppFactory;
 
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../db/connDB.php';
+//require __DIR__ . '/../db/connDB.php';
+
+$connexionService = new ConnexionService();
+$connexionDatabase = $connexionService->connexionDatabase();
 
 session_start();
 
@@ -52,21 +58,18 @@ $app->get('/register', [LoginController::class, 'register']);
 $app->map(['GET', 'POST'], '/login', LoginController::class . ':login');
 $app->get('/logout', [LoginController::class, 'logout']);
 $app->get('/admin', [AdminController::class, 'index']);
-$app->get('/admin/users', [UserCrudController::class, 'index']);
-$app->map(['GET'],'/admin/users/supprimer/{id}', [UserCrudController::class, 'deleteUser']);
-$app->get('/admin/posts', [PostCrudController::class, 'index']);
-$app->get('/admin/categories', [CategoryCrudController::class, 'index']);
-$app->get('/admin/categories/categorie', [CategoryCrudController::class, 'category']);
-$app->map(['POST'],'/admin/categories/categorie/ajout', [CategoryCrudController::class, 'createCategory']);
-$app->map(['GET'],'/admin/categories/supprimer/{id}', [CategoryCrudController::class, 'deleteCategory']);
-/*$app->get('/blog/article/{id}', [ShowPostController::class, 'show']);
-$app->get('/blog/ajout-article', [AddPostController::class, 'renderCreationForm']);
-$app->post('/blog/ajout-article', [AddPostController::class, 'add']);
-$app->get('/blog/suppression-article/{id}', [DeletePostController::class, 'renderDeleteForm']);
-$app->post('/blog/suppression-article/{id}', [DeletePostController::class, 'remove']);
-$app->get('/blog/modification-article/{id}', [UpdatePostController::class, 'renderUpdateForm']);
-$app->post('/blog/modification-article/{id}', [UpdatePostController::class, 'update']);
-$app->post('/blog/article/{id}/ajout-commentaire', [AddCommentController::class, 'add']);*/
+$app->get('/admin/users', [UserAdminController::class, 'index']);
+$app->map(['GET'],'/admin/users/supprimer/{id}', [UserAdminController::class, 'deleteUser']);
+$app->get('/admin/posts', [PostAdminController::class, 'index']);
+$app->map(['GET'],'/admin/posts/supprimer/{id}', [PostAdminController::class, 'deletePostsUser']);
+$app->get('/admin/categories', [CategoryAdminController::class, 'index']);
+$app->get('/admin/categories/categorie', [CategoryAdminController::class, 'category']);
+$app->map(['POST'],'/admin/categories/categorie/ajout', [CategoryAdminController::class, 'createCategory']);
+$app->map(['GET'],'/admin/categories/supprimer/{id}', [CategoryAdminController::class, 'deleteCategory']);
+$app->get('/admin/comments', [CommentAdminController::class, 'index']);
+$app->get('/admin/contacts', [ContactAdminController::class, 'index']);
+$app->map(['GET'],'/admin/contacts/supprimer/{id}', [ContactAdminController::class, 'deleteContact']);
+
 
 $app->get('/{routes:.+}', function (RequestInterface $request, ResponseInterface $response) use ($twig) {
     return $twig->render($response->withStatus(404), 'error.twig');
@@ -74,3 +77,4 @@ $app->get('/{routes:.+}', function (RequestInterface $request, ResponseInterface
 $app->run();
 
 
+/*/admin/contacts*/
