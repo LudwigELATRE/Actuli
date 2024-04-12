@@ -7,6 +7,7 @@ use App\lib\View;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use App\Repository\PostsCommentRepository;
+use App\Repository\UserRepository;
 use App\Services\ImageService;
 use App\Services\UserService;
 use Psr\Http\Message\RequestInterface;
@@ -34,13 +35,16 @@ class PostController
         $comments = $postsCommentRepository->getAllCommentPostId($args);
         $categoryRepository = new CategoryRepository();
         $categories = $categoryRepository->getAllCategory();
+        $UserRepositoy = new UserRepository();
+        $paramUser = $UserRepositoy->getUser($data->getUser()['id']);
 
         $view = new View();
         $html = $view->render('/blogpage/show.html.twig', [
             "post" => $post,
             'user' => $userData,
             'comments' => $comments,
-            'categories' => $categories
+            'categories' => $categories,
+            'paramUser' => $paramUser
         ]);
         $response->getBody()->write($html);
         return $response;
@@ -56,7 +60,6 @@ class PostController
      */
     public function addComment(RequestInterface $request, ResponseInterface $response, array $args)
     {
-        dump($args);
         $queryParams = $request->getParsedBody();
         $error = [];
         if (!empty($queryParams) && isset($queryParams["content"]))
