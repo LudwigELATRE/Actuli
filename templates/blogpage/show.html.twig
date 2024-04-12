@@ -49,6 +49,9 @@
                                         <div class="fw-bold">{{ comment.author }} crée le {{ comment.createdAt|date("m/d/Y") }}</div>
                                         {{ comment.content }}
                                     </div>
+                                    {% if comment.user_id == paramUser.0.id %}
+                                    <div id="pencil"><a href=""><i class="fa-solid fa-pencil"></i></a></div>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                         </div>

@@ -19,9 +19,7 @@ use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 use Slim\Factory\AppFactory;
 
-
 require __DIR__ . '/../vendor/autoload.php';
-//require __DIR__ . '/../db/connDB.php';
 
 $connexionService = new ConnexionService();
 $connexionDatabase = $connexionService->connexionDatabase();
@@ -67,6 +65,7 @@ $app->get('/admin/categories/categorie', [CategoryAdminController::class, 'categ
 $app->map(['POST'],'/admin/categories/categorie/ajout', [CategoryAdminController::class, 'createCategory']);
 $app->map(['GET'],'/admin/categories/supprimer/{id}', [CategoryAdminController::class, 'deleteCategory']);
 $app->get('/admin/comments', [CommentAdminController::class, 'index']);
+$app->map(['GET'],'/admin/comments/supprimer/{id}', [CommentAdminController::class, 'deleteComment']);
 $app->get('/admin/contacts', [ContactAdminController::class, 'index']);
 $app->map(['GET'],'/admin/contacts/supprimer/{id}', [ContactAdminController::class, 'deleteContact']);
 
