@@ -109,6 +109,5 @@ class LoginController
         session_destroy();
 
         header("Location: /login");
-        exit;
     }
 }

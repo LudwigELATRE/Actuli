@@ -19,9 +19,7 @@ use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 use Slim\Factory\AppFactory;
 
-
 require __DIR__ . '/../vendor/autoload.php';
-//require __DIR__ . '/../db/connDB.php';
 
 $connexionService = new ConnexionService();
 $connexionDatabase = $connexionService->connexionDatabase();
