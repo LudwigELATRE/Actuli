@@ -35,7 +35,16 @@ class LoginController
 
         if (!$userData['isLoggedIn']){
             if ($user && password_verify($dataUser['password'], $user['password'])) {
-                $_SESSION['user'] = $user;
+                // Regenerate session ID on successful login to prevent session fixation
+                session_regenerate_id(true);
+
+                // Store only essential information in session to minimize data exposure
+                $_SESSION['user'] = [
+                    'id' => $user['id'], // example: only store user ID
+                    'username' => $user['username'] // and username
+                ];
+
+                // Redirect to home page after successful login
                 return $response->withHeader('Location', '/')->withStatus(302);
             } else {
                 // Authentification échouée, préparez le message d'erreur
@@ -104,10 +113,20 @@ class LoginController
      */
     public function logout()
     {
-        $_SESSION = [];
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            // Clear session variables
+            session_unset();
 
-        session_destroy();
+            // Regenerate session ID to invalidate the old one
+            session_regenerate_id(true);
 
-        header("Location: /login");
+            // Destroy the session
+            session_destroy();
+
+            // Redirect to the login page or home page after logout
+            header("Location: /login");
+            exit();
+        }
+
     }
 }

@@ -60,14 +60,17 @@ class PostController
      */
     public function addComment(RequestInterface $request, ResponseInterface $response, array $args)
     {
+        $data = new UserService();
         $queryParams = $request->getParsedBody();
         $error = [];
         if (!empty($queryParams) && isset($queryParams["content"]))
         {
             try {
+                $UserRepositoy = new UserRepository();
+                $user = $UserRepositoy->getUser($data->getUser()['id']);
                 $datetime = new \DateTimeImmutable();
-                $author = $_SESSION['user']['firstname'] . $_SESSION['user']['lastname'];
-                $postComment = new PostComment($_SESSION['user']['id'],$args['id'],$author,$_SESSION['user']['email'],$queryParams["content"],$datetime);
+                $author = $user[0]['firstname'] . $user[0]['lastname'];
+                $postComment = new PostComment($user[0]['id'],$args['id'],$author,$user[0]['email'],$queryParams["content"],$datetime);
                 $postCommentrepository = new PostsCommentRepository();
                 $postCommentrepository->save($postComment);
 
@@ -150,7 +153,7 @@ class PostController
         $categories = $categorieRepository->getAllCategory();
         $queryParams = $request->getParsedBody();
         $erreurs = [];
-        if (!empty($queryParams) && !empty($queryParams['categorie']) && !empty($queryParams['title']) && !empty($queryParams['content']) && isset($queryParams["categorie"], $queryParams["title"], $queryParams["content"]) && isset($_FILES['post-image']))
+        if (!empty($queryParams) && !empty($queryParams['categorie']) && !empty($queryParams['title']) && !empty($queryParams['content']) && isset($queryParams["categorie"], $queryParams["title"], $queryParams["content"]))
         {
             $slug = strtolower(trim(str_replace(' ', '-', $queryParams["title"])));
             $datetime = new \DateTimeImmutable();
