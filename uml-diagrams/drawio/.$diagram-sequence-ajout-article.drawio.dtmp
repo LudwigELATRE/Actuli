@@ -1,0 +1,94 @@
+<mxfile host="Electron" modified="2024-04-12T14:23:52.081Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="l9GEIn05OMqc497YFjH0" version="24.1.0" type="device">
+  <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
+    <mxGraphModel dx="1434" dy="884" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-19" value="Ajouter un article" style="shape=umlFrame;whiteSpace=wrap;html=1;width=170;height=40;fontStyle=1;labelBackgroundColor=#ffffff;labelBorderColor=none;gradientColor=none;swimlaneFillColor=none;shadow=0;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="60" y="150" width="1100" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-20" value="Diagramme de séquence - Modifier un article" style="text;html=1;resizable=0;points=[];autosize=1;align=center;verticalAlign=top;spacingTop=-4;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="445" y="70" width="330" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-21" value=":user" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;shadow=0;strokeColor=#000000;gradientColor=none;fontSize=16;align=center;" vertex="1" parent="1">
+          <mxGeometry x="150" y="210" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-22" value=":system" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;labelBackgroundColor=#ffffff;strokeColor=#000000;gradientColor=none;fontSize=16;align=center;" vertex="1" parent="1">
+          <mxGeometry x="340" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-23" value="" style="endArrow=none;dashed=1;html=1;fontSize=16;entryX=0.482;entryY=0.683;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.093;exitY=1.003;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="ZVPebnd19_1m-Fgdtp3M-19" target="ZVPebnd19_1m-Fgdtp3M-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="164" y="612" as="sourcePoint" />
+            <mxPoint x="110" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-24" value="" style="endArrow=none;dashed=1;html=1;fontSize=16;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.31;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="ZVPebnd19_1m-Fgdtp3M-28" target="ZVPebnd19_1m-Fgdtp3M-22">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="171.20000000000005" y="662.8800000000001" as="sourcePoint" />
+            <mxPoint x="400" y="311" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-25" value=":bdd" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;shadow=0;strokeColor=#000000;gradientColor=none;fontSize=16;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1013" y="210" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-26" value="id_post" style="html=1;gradientColor=none;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="346.794117647059" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-27" value="&amp;lt;&amp;lt;get_id&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;fontSize=11;dashed=1;endFill=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="400" y="371.5" as="sourcePoint" />
+            <mxPoint x="560" y="372" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-28" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=1;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="395" y="372" width="10" height="178" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-29" value="" style="endArrow=none;dashed=1;html=1;fontSize=16;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.31;exitY=1.004;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="ZVPebnd19_1m-Fgdtp3M-19" target="ZVPebnd19_1m-Fgdtp3M-28">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="530" as="sourcePoint" />
+            <mxPoint x="400" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-30" value="updatePost()" style="html=1;verticalAlign=bottom;endArrow=block;fontSize=11;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="165" y="371" as="sourcePoint" />
+            <mxPoint x="400" y="371" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-31" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=1;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1023" y="375" width="10" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-32" value="&amp;lt;&amp;lt;get&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;fontSize=11;dashed=1;endFill=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="670" y="371.5" as="sourcePoint" />
+            <mxPoint x="1030" y="372" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-33" value="&amp;lt;&amp;lt;return&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;fontSize=11;dashed=1;endFill=0;entryX=1.168;entryY=0.713;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.146;exitY=0.999;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="1025" y="451" as="sourcePoint" />
+            <mxPoint x="406.68000000000006" y="449.55999999999995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-34" value="getPost()" style="html=1;verticalAlign=bottom;endArrow=classic;fontSize=11;exitX=0.057;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;dashed=1;endFill=0;" edge="1" parent="1" source="ZVPebnd19_1m-Fgdtp3M-28">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="175" y="381" as="sourcePoint" />
+            <mxPoint x="165" y="452" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-35" value="" style="endArrow=none;dashed=1;html=1;fontSize=16;entryX=0.493;entryY=0.739;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="ZVPebnd19_1m-Fgdtp3M-25">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1028" y="380" as="sourcePoint" />
+            <mxPoint x="410" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZVPebnd19_1m-Fgdtp3M-36" value="" style="endArrow=none;dashed=1;html=1;entryX=0.479;entryY=1.037;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.881;exitY=1.002;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="ZVPebnd19_1m-Fgdtp3M-19" target="ZVPebnd19_1m-Fgdtp3M-31">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1027.79" y="500.36300000000006" as="sourcePoint" />
+            <mxPoint x="110" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

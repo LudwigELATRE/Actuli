@@ -53,7 +53,7 @@
                                 <th scope="col">Nom</th>
                                 <th scope="col">Post</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Role</th>
+                                <th scope="col">Commentaire</th>
                                 <th scope="col">Date de creation</th>
                             </tr>
                             </thead>
@@ -66,7 +66,7 @@
                                     <td>{{ allcomment.email }}</td>
                                     <td>{{ allcomment.content }}</td>
                                     <td>{{ allcomment.created_at|date("m/d/Y") }}</td>
-                                    <td><a><a class="btn btn-danger" href="/admin/users/supprimer/{{ allcomment.id }}">Supprimer</a></a></td>
+                                    <td><a><a class="btn btn-danger" href="/admin/comments/supprimer/{{ allcomment.id }}">Supprimer</a></a></td>
                                 </tr>
                             {% endfor %}
                             </tbody>

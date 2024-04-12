@@ -59,6 +59,7 @@ class CategoryRepository
     {
         $connexionService = new ConnexionService();
         $connexionDatabase = $connexionService->connexionDatabase();
+
         $id = $args['id'];
 
         // Démarrez une transaction

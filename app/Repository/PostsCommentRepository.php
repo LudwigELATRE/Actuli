@@ -4,9 +4,11 @@ namespace App\Repository;
 
 use App\Entity\PostComment;
 use App\Services\ConnexionService;
+use Exception;
 use PDO;
 class PostsCommentRepository
 {
+
     /**
      * Retrieves all comments associated with a specific post.
      *
@@ -74,10 +76,33 @@ class PostsCommentRepository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Deletes a category based on the provided ID.
+     * Handles deletion within a transaction to ensure integrity.
+     *
+     * @param array $args Must contain the 'id' of the category to be deleted.
+     * @throws Exception If there is an error during the transaction, including rollback scenarios.
+     */
+    public function delete(array $args): void
+    {
+        $connexionService = new ConnexionService();
+        $connexionDatabase = $connexionService->connexionDatabase();
+
+        $id = $args['id'];
+
+        // Démarrez une transaction
+        $connexionDatabase->beginTransaction();
+
+        try {
+            $stmt = $connexionDatabase->prepare("DELETE FROM posts_comment WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $connexionDatabase->commit();
+        } catch (Exception $e) {
+            // En cas d'erreur, annulez la transaction
+            $connexionDatabase->rollback();
+            throw $e; // Vous pouvez choisir de relancer l'exception ou de la gérer d'une autre manière
+        }
+    }
 }
-/*"
-        SELECT pc.*, p.name AS post_name
-        FROM posts_comment pc
-        JOIN posts p ON pc.post_id = p.id
-        ORDER BY pc.createdAt DESC
-    "*/
