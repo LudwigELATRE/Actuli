@@ -1,17 +1,94 @@
 <?php
 
-global $pdo;
-require "db/connDB.php";
+namespace App\Entity;
 
-$pdo->exec("
-CREATE TABLE IF NOT EXISTS posts_comment (
-  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  post_id INT NOT NULL,
-  author VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  content TEXT NOT NULL,
-  createdAt DATETIME NULL,
-  FOREIGN KEY (`post_id`)  REFERENCES posts (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+class PostComment
+{
+    private ?int $id;
+    private ?int $user_id;
+    private ?int $post_id;
+    private ?string $author;
+    private ?string $email;
+    private ?string $content;
+    private ?string $createdAt;
 
-echo ' Tables : POSTS_COMMENT, ';
+    public function __construct($user_id,$post_id,$author,$email,$content,\DateTimeImmutable $createdAt)
+    {
+        $this->user_id = $user_id;
+        $this->post_id = $post_id;
+        $this->author = $author;
+        $this->email = $email;
+        $this->content = $content;
+        $this->createdAt = $createdAt->format('Y-m-d');
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?int $user_id): void
+    {
+        $this->user_id = $user_id;
+    }
+
+    public function getPostId(): ?int
+    {
+        return $this->post_id;
+    }
+
+    public function setPostId(?int $post_id): void
+    {
+        $this->post_id = $post_id;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?string $author): void
+    {
+        $this->author = $author;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): void
+    {
+        $this->content = $content;
+    }
+
+    public function getCreatedAt(): ?string
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?string $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+}

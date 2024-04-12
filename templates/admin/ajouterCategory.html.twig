@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+
+
+{% block content %}
+    <div class="container d-flex">
+        <div class="row col-2">
+            <div class="sb-sidenav-menu">
+                <div class="nav flex-column">
+                    <div class="sb-sidenav-menu-heading">Tableau de bord</div>
+                    <a class="nav-link d-flex" href="/admin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Tableau de bord
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/users">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                        User
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/categories">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+                        Categorie
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/posts">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+                        Article
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row col-10">
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Tableau de bord</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Tableau de bord</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form id="category-ajout-form" name="category-ajout-form" action="/admin/categories/categorie/ajout" method="POST">
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <input type="text" id="form6Example3" class="form-control" id="name" name="name"  placeholder="Choissisez un titre"/>
+                                <label class="form-label" for="form6Example3">Titre</label>
+                            </div>
+
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <textarea class="form-control" id="form6Example7" rows="4" id="description" name="description" placeholder="Entrer votre texte ici">{{ post.content }}</textarea>
+                                <label class="form-label" for="form6Example7">Description</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

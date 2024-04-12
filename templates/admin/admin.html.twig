@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+
+
+{% block content %}
+    <div class="container d-flex">
+        <div class="row col-2">
+            <div class="sb-sidenav-menu">
+                <div class="nav flex-column">
+                    <div class="sb-sidenav-menu-heading">Tableau de bord</div>
+                    <a class="nav-link d-flex" href="/admin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Tableau de bord
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/users">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                        User
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/categories">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+                        Categorie
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/posts">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-newspaper"></i></div>
+                        Article
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/comments">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-comment"></i></div>
+                        Commentaires
+                    </a>
+                    <a class="nav-link d-flex" href="/admin/contacts">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-envelope"></i></div>
+                        Contacts
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row col-10">
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Tableau de bord</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Tableau de bord</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        DataTable Example
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Position</th>
+                                <th>Date de creation</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for alluser in allusers %}
+                                <tr>
+                                    <td>{{ alluser.firstname }} {{ alluser.lastname }}</td>
+                                    <td>{{ alluser.email }}</td>
+                                    <td>{{ alluser.roles }}</td>
+                                    <td>{{ alluser.created_at }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

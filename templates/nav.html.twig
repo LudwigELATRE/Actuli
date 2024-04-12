@@ -1,0 +1,26 @@
+{% block navbar %}
+    <div class="container d-flex">
+    <div class="row">
+        <div class="sb-sidenav-menu">
+            <div class="nav flex-column">
+                <div class="sb-sidenav-menu-heading">Tableau de bord</div>
+                <a class="nav-link d-flex" href="/admin">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Tableau de bord
+                </a>
+                <a class="nav-link d-flex" href="/admin/users">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                    User
+                </a>
+                <a class="nav-link d-flex" href="/admin/categories">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+                    Categorie
+                </a>
+                <a class="nav-link d-flex" href="/admin/posts">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
+                    Post
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

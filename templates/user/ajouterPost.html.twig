@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+
+{% block content %}
+    <!-- Page content-->
+    <div class="container">
+        <div class="row d-flex justify-content-center m-5">
+            <!-- Blog entries-->
+            <div class="col-lg-8">
+                <form id="user-ajout-form" name="user-ajout-form" action="/mon-compte/mes-posts/ajouter/post" method="POST" enctype="multipart/form-data">
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error.0 }}
+                    </div>
+                    {% endif %}
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="visually-hidden" for="inlineFormSelectPref">Categorie</label>
+                        <select class="form-select" aria-label="Default select example" id="categorie" name="categorie">
+                            <option disabled selected>Choissisez Votre Categorie</option>
+                            {% for categorie in categories %}
+                            {#{% for i in 0..4 %}#}
+                            <option value="{{ categorie.name }}">{{ categorie.name }}</option>
+                            {#{% endfor %}#}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="form6Example3" class="form-control" id="title" name="title" placeholder="Choissisez un titre"/>
+                        <label class="form-label" for="form6Example3">Titre</label>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <textarea class="form-control" id="form6Example7" rows="4" id="content" name="content" placeholder="Entrer votre texte ici"></textarea>
+                        <label class="form-label" for="form6Example7">Contenu</label>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label for="exampleFormControlFile1">Image</label>
+                        <!-- On limite le fichier à 100Ko -->
+                        <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+                        <input type="file" class="form-control-file" id="post-image" name="post-image">
+                    </div>
+
+                    <div class="form-check d-flex mb-4">
+                        <input
+                                class="form-check-input me-2"
+                                type="checkbox"
+                                name="published"
+                                value="1"
+                                id="form6Example8"
+                                checked
+                        />
+                        <label class="form-check-label" for="form6Example8"> Voulez publier votre article? </label>
+                    </div>
+
+                    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Ajouter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
