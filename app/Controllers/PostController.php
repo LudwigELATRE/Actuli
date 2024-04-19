@@ -63,8 +63,7 @@ class PostController
         $data = new UserService();
         $queryParams = $request->getParsedBody();
         $error = [];
-        if (!empty($queryParams) && isset($queryParams["content"]))
-        {
+        if (!empty($queryParams) && isset($queryParams["content"])) {
             try {
                 $UserRepositoy = new UserRepository();
                 $user = $UserRepositoy->getUser($data->getUser()['id']);
@@ -153,14 +152,14 @@ class PostController
         $categories = $categorieRepository->getAllCategory();
         $queryParams = $request->getParsedBody();
         $erreurs = [];
-        if (!empty($queryParams) && !empty($queryParams['categorie']) && !empty($queryParams['title']) && !empty($queryParams['content']) && isset($queryParams["categorie"], $queryParams["title"], $queryParams["content"]))
-        {
+        if (!empty($queryParams) && !empty($queryParams['categorie']) && !empty($queryParams['title']) && !empty($queryParams['content']) && isset($queryParams["categorie"], $queryParams["title"], $queryParams["content"])) {
             $slug = strtolower(trim(str_replace(' ', '-', $queryParams["title"])));
             $datetime = new \DateTimeImmutable();
             try {
                 $imageService = new ImageService();
-                $image = $imageService->enregistrementImage($_FILES['post-image']);
-                if ($image['success']){
+                $file = $_FILES['post-image'];
+                $image = $imageService->enregistrementImage($file);
+                if ($image['success'] === true) {
                     $post = new Post($data->getUser()['id'],$queryParams["categorie"],$queryParams["title"],$queryParams["content"],$slug,$image['name'],$queryParams["published"],$datetime);
                     $postRepositoy = new PostRepository();
                     $postRepositoy->save($post->getUserId(),$post->getCategory(),$post->getTitle(),$post->getContent(),$post->getSlug(),$post->getImage(),$post->getPublished(),$post->getCreatedAt());
@@ -196,7 +195,6 @@ class PostController
             $response->getBody()->write($html);
             return $response;
         }
-
     }
 
     /**
@@ -241,11 +239,11 @@ class PostController
         $categorieRepository = new CategoryRepository();
         $categories = $categorieRepository->getAllCategory();
         $queryParams = $request->getParsedBody();
-        if (!empty($queryParams) && isset($queryParams["categorie"], $queryParams["title"], $queryParams["content"]))
-        {
+        if (!empty($queryParams) && isset($queryParams["categorie"], $queryParams["title"], $queryParams["content"])) {
             $slug = strtolower(trim(str_replace(' ', '-', $queryParams["title"])));
             $datetime = new \DateTimeImmutable();
-            $image = basename(str_replace(' ', '-', strtolower($_FILES['post-image']['name'])));
+            $fileName = $_FILES['post-image']['name'];
+            $image = basename(str_replace(' ', '-', strtolower($fileName)));
             try {
                 $post = new Post($data->getUser()['id'],$queryParams["categorie"],$queryParams["title"],$queryParams["content"],$slug,$image,$queryParams["published"],$datetime);
                 $post->setId($queryParams["id"]);
@@ -285,6 +283,7 @@ class PostController
      * @param ResponseInterface $response La réponse HTTP à retourner.
      * @param array $args Arguments routage dynamique (par exemple, ID du post).
      * @return ResponseInterface
+     * @throws \Exception
      */
     public function deletePostsUser(RequestInterface $request, ResponseInterface $response,array $args): ResponseInterface
     {

@@ -6,9 +6,18 @@ class UserService
 {
     public function getSession(): array
     {
+
+        $userExists = isset($_SESSION['user']);
+
+        $roles = null;
+
+        if ($userExists) {
+            $roles = $_SESSION['user']['roles'] ?? null;
+        }
+
         return [
-            'isLoggedIn' => isset($_SESSION['user']),
-            'roles' => $_SESSION['user']['roles'] ?? null,
+            'isLoggedIn' => $userExists,
+            'roles' => $roles,
         ];
     }
 
