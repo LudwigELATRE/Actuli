@@ -74,6 +74,3 @@ $app->get('/{routes:.+}', function (RequestInterface $request, ResponseInterface
     return $twig->render($response->withStatus(404), 'error.twig');
 });
 $app->run();
-
-
-/*/admin/contacts*/
