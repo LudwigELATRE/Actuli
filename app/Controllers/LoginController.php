@@ -71,17 +71,29 @@ class LoginController
             if (!empty($queryParams) && isset($queryParams["firstname"], $queryParams["lastname"], $queryParams["email"], $queryParams["password"], $queryParams["sexe"] )) {
                 $slug = strtolower($queryParams["firstname"]."-".$queryParams["lastname"]);
                 $datetime = new \DateTimeImmutable();
-                try {
-                    $user = new User($queryParams["firstname"],$queryParams["lastname"],$queryParams["email"],password_hash($queryParams["password"], PASSWORD_DEFAULT),'ROLE_USER',$datetime,$queryParams["sexe"],$slug);
-                    $userRepository = new UserRepository();
-                    $userRepository->save($user);
+                
+                // Ajout de la validation du mot de passe
+                if ($this->validatePassword($queryParams["password"])) {
+                    try {
+                        $user = new User($queryParams["firstname"], $queryParams["lastname"], $queryParams["email"], password_hash($queryParams["password"], PASSWORD_DEFAULT), 'ROLE_USER', $datetime, $queryParams["sexe"], $slug);
+                        $userRepository = new UserRepository();
+                        $userRepository->save($user);
 
-                    return $response->withHeader('Location', '/login')->withStatus(302);
-                } catch (\Exception $e)
-                {
-                    // Gestion des erreurs (par exemple, email déjà existant)
-                    $error = "Une erreur est survenue";
-                    // Passer l'erreur à la vue
+                        //return $response->withHeader('Location', '/login')->withStatus(302);
+                        $sucess = "Votre compte à bien été créé";
+                        $view = new View();
+                        $html = $view->render('/loginpage/login.html.twig', ['success' => $sucess]);
+                        $response->getBody()->write($html);
+                        return $response;
+                    } catch (\Exception $e) {
+                        $error = "Une erreur est survenue: " . $e->getMessage();
+                        $view = new View();
+                        $html = $view->render('/loginpage/register.html.twig', ['error' => $error]);
+                        $response->getBody()->write($html);
+                        return $response;
+                    }
+                } else {
+                    $error = "Le mot de passe doit contenir au moins 8 caractères, incluant des minuscules, des majuscules, des chiffres et des caractères spéciaux.";
                     $view = new View();
                     $html = $view->render('/loginpage/register.html.twig', ['error' => $error]);
                     $response->getBody()->write($html);
@@ -96,6 +108,18 @@ class LoginController
         }else{
             return $response->withHeader('Location', '/')->withStatus(302);
         }
+    }
+
+    /**
+     * Valide la complexité du mot de passe.
+     *
+     * @param string $password Le mot de passe à valider.
+     * @return bool Renvoie true si le mot de passe est conforme aux exigences, sinon false.
+     */
+    private function validatePassword(string $password): bool
+    {
+        $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/';
+        return preg_match($pattern, $password);
     }
 
     /**

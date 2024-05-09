@@ -32,3 +32,14 @@ div#layoutDefault_footer {
 div#pencil {
     padding-left: 20px;
 }
+
+div#height-1 {
+    height: 863px;
+}
+
+div#height-2 {
+    height: 863px;
+}
+input {
+    border: 1px solid #abb0b5;
+}

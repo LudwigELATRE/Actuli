@@ -36,7 +36,11 @@ class PostController
         $categoryRepository = new CategoryRepository();
         $categories = $categoryRepository->getAllCategory();
         $UserRepositoy = new UserRepository();
-        $paramUser = $UserRepositoy->getUser($data->getUser()['id']);
+        if (!isset($data->getUser()['id'])){
+            $paramUser = null;
+        }else {
+            $paramUser = $UserRepositoy->getUser($data->getUser()['id']);
+        }
 
         $view = new View();
         $html = $view->render('/blogpage/show.html.twig', [
@@ -242,9 +246,10 @@ class PostController
         {
             $slug = strtolower(trim(str_replace(' ', '-', $queryParams["title"])));
             $datetime = new \DateTimeImmutable();
-            $image = basename(str_replace(' ', '-', strtolower($_FILES['post-image']['name'])));
+            $imageService = new ImageService();
+            $image = $imageService->enregistrementImage($_FILES['post-image']);
             try {
-                $post = new Post($data->getUser()['id'],$queryParams["categorie"],$queryParams["title"],$queryParams["content"],$slug,$image,$queryParams["published"],$datetime);
+                $post = new Post($data->getUser()['id'],$queryParams["categorie"],$queryParams["title"],$queryParams["content"],$slug,$image['name'],$queryParams["published"],$datetime);
                 $post->setId($queryParams["id"]);
                 $post->setUpdatedAt($datetime);
                 $postRepositoy = new PostRepository();

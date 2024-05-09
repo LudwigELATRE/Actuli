@@ -12,8 +12,8 @@ class UserService
         ];
     }
 
-    public function getUser(): array
+        public function getUser(): array
     {
-        return $_SESSION['user'];
+        return $_SESSION['user'] ?? [];
     }
 }
